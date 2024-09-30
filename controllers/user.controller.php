@@ -15,7 +15,6 @@ function login(){
             $erreur = "Login/Mot de passe incorrect";
         }
     }
-
     if($check == null){
         require('views/templates/user/login.view.php');
     }else{        
@@ -23,21 +22,21 @@ function login(){
         header("Location: index.php?page=dashboard");        
     }
 
-
     $content = ob_get_clean();
     require("views/base.view.php");
 }
 
-function register(){ 
-    
-    return register_user($_POST);
+
+function logout(){ 
+    session_destroy();
+    header("Location: index.php?page=home"); 
 }
 
 function passwordReminder($message =""){
     $php_SSID = session_id();
     $erreur = null;
     ob_start();
-    $title = "Création de compte";
+    $title = "Oubli de mot de passe";
     require('views/templates/user/password-reminder.view.php'); 
     $content = ob_get_clean();
     require("views/base.view.php");              
@@ -48,9 +47,24 @@ function stepRegister($message =""){
     $erreur = null;
     ob_start();
     $title = "Création de compte";
+    if(!empty($_POST)){
+        $new_user = register_user($array_post);
+        var_dump($new_user);
+    }
+
     require('views/templates/user/register.view.php'); 
     $content = ob_get_clean();
     require("views/base.view.php");              
+}
+
+function displayProfil(){  
+    ob_start();
+    $title = "Mon profil";
+    $message = "";
+    $profil = get_infos($_SESSION['user_id']);
+    require('views/templates/user/profil.view.php');
+    $content = ob_get_clean();
+    require("views/base.view.php");
 }
 
 function displayDashboard(){  

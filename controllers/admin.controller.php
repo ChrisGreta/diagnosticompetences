@@ -1,6 +1,6 @@
 <?php
     require "models/admin.model.php";
-    require_once "models/do.model.php";
+    require_once "models/dc.model.php";
 
     function infoAlerts($message, $type){
 

@@ -58,4 +58,17 @@
         return $resultats;
     }
 
+    function analyseResultat($cle_Competence, $points){
+        
+        try {
+            $sql = "SELECT session_resultat_libelle, session_resultat_niveau FROM `session_resultat` WHERE `session_resultat_code` LIKE '$cle_Competence' AND `session_resultat_points_max` >= $points ORDER BY `session_resultat_points_max` ASC LIMIT 0,1;";
+            $query = mysqli_query($GLOBALS["conn"], $sql);
+            $session_resultat = mysqli_fetch_row($query);
+        }catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            return 0;
+        }        
+        return $session_resultat;
+    }
+
 ?>

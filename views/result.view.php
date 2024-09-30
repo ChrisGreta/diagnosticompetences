@@ -111,16 +111,30 @@
     $label_desc = getLabels("descriptif");
     foreach ($labels as $code => $label) {
         # code...
-
+        
+        switch ($array_analyse[$code]['niveau']) {
+          case 2:
+            $colorNiveau = "bg-green-50 dark:bg-gray-800 dark:text-green-400 text-green-800";
+            break;
+          case 1:
+              $colorNiveau = "bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400 text-yellow-800";
+              break;            
+          case 0:
+          default:
+            $colorNiveau = "bg-red-50 dark:bg-gray-800 dark:text-red-400 text-red-800";
+            break;
+        }
         ?>
         <h2 class="text-lg font-bold"><?= $label?></h2>
         <?= $label_desc[$code]; ?>
-        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+
+
+        <div class="p-4 mb-4 text-sm  rounded-lg <?= $colorNiveau;?>" role="alert">
             <span class="font-medium">
             <?php
             getResultats("descriptif");
+            echo $array_analyse[$code]['libelle'];
             ?>
-            Pas de problème particulier dans Ce domaine. vous ne semblez cependant pas être un littéraire Chevroné.
           </span> 
         </div>
         <?php
@@ -130,37 +144,6 @@
 
 </section>
 
-<?php 
-
-    $resultats = getResultats($session_id);
-
-    $array_result_0 = array();
-    foreach ($resultats as $key => $reponse) {
-        # code...
-        
-        foreach (json_decode($reponse['JSON_points_reponse'],true) as $key => $point) {
-            # code...
-            $array_result_0[$point["name"]][] =$point["point"];
-        }
-    }
-    foreach ($array_result_0 as $code => $result) {
-        # code...
-        $somme = 0;
-        foreach ($result as $key => $point) {
-            # code...
-            $somme+=$point;
-        }
-        echo "<hr>".$code.":".$somme."/".count($array_result_0[$code]);
-
-        //ignore certaines compétences, abandonnées en cours de projet ?
-        $categ_exclude = array("CDC","CDA","MAA","CDE","IVQ","GDS","CAD","OSA","IDD","ECO");
-        if (!in_array($code, $categ_exclude)){
-            $array_result[$code]= round($somme/count($array_result_0[$code]),2);
-        }
-    } 
-    $str_result_point = implode(',',$array_result);
-    $str_code_point = implode('","',array_keys($array_result));
-?>
 <script defer> 
   /*********************  ***********************/
   optionsRadar = {

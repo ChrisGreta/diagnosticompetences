@@ -21,17 +21,14 @@
 
             if($points_reponse != null){
                 $points_update = json_decode($points_reponse[0],true);
-    
                 //parcours des points obtenus
                 $top =1;
                 foreach ($points_update as $point) {
                     # code...
                     if($top == 1){
                         $sqlupdate = 'UPDATE `session_reponses` SET  `reponse_ID`='.$ID_reponse.',`categ_reponse_ID`="'.$point['name'].'",`points`='.$point['point'].'  WHERE   `question_ID`='.$current_question.';';                                      
-                    }else{
-    
                     }
-    
+
                     if(DEBUG == false){
                         echo "<pre>";
                             echo "<br>SQL:<strong>$sqlupdate</strong><br>";
@@ -53,7 +50,6 @@
     function lastQuestion($php_SSID){
        
         try {
-
             $sql = "SELECT question_ID  FROM `session_reponses` WHERE `session_ID` LIKE '$php_SSID' and `reponse_ID`=0 ORDER BY `session_reponse_ID` asc LIMIT 0,1";
             $query = mysqli_query($GLOBALS["conn"], $sql);
             $question_id = mysqli_fetch_row($query);
@@ -64,7 +60,22 @@
         }        
         return $question_id[0];
     }
+ 
     
+    function lastSession($user_ID){
+       
+        try {
+            $sql = "SELECT `session_id` FROM `utilisateur_session` WHERE `utilisateur_id`=$user_ID ORDER BY `utilisateur_session`.`session_maj` DESC LIMIT 0,1;";
+            $query = mysqli_query($GLOBALS["conn"], $sql);
+            $session_id = mysqli_fetch_row($query);
+            
+        }catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            return 0;
+        }        
+        return $session_id[0];
+    }
+
     function getProgress($php_SSID, $percent = true){
        
         try {
@@ -91,19 +102,19 @@
         return $progress[0];
     }
 
-
-
-
     function deleteTest($php_SSID){
         header( "Location: index.php?page=admin" );
         return true;
     }
 
-    function generateTest($php_SSID){
+    function generateTest($php_SSID, $user_ID){
         try {
             if(count(loadQuestion($php_SSID, false))==0){
-                $sql = 'INSERT INTO session_reponses SELECT null,"'.$php_SSID.'",`ID_question`,0,0,0 FROM `questions` order by rand();';
-                $query = mysqli_query($GLOBALS["conn"], $sql);                
+                $sql_session_reponses = 'INSERT INTO session_reponses SELECT null,"'.$php_SSID.'",`ID_question`,0,0,0 FROM `questions` order by rand();';
+                $query = mysqli_query($GLOBALS["conn"], $sql_session_reponses);       
+                
+                $sql_utilisateur_session = "INSERT INTO `utilisateur_session` (`utilisateur_session_id`, `utilisateur_id`, `session_id`, `session_debut`, `session_maj`) VALUES (NULL, '$user_ID', '$php_SSID', current_timestamp(), current_timestamp());";
+                $query = mysqli_query($GLOBALS["conn"], $sql_utilisateur_session);                 
             }
         }catch (Exception $e) {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
@@ -125,5 +136,5 @@
         return $question;
     }
 
+   
 
-    

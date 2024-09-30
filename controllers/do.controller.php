@@ -1,45 +1,29 @@
 <?php
-    require_once 'models/do.model.php';
-    
-    function stepDisplay($currentstep){  
+    require_once 'models/dc.model.php';
 
-        $php_SSID = session_id();
-        $erreur = null;
-        // Remplissage de la variable $content
+    function displayDC($php_SSID){  
         ob_start();
-        switch ($currentstep) {   
-            case 'step1':
-                $title = "Nouvelle session";
-                generateTest($php_SSID);
-            case 'stepTest':
-                if(!empty($_POST['ID_reponse'])){
-                    if(updateSession($_POST['ID_reponse'], $php_SSID) == false){
-                        $erreur = "Veuillez sélectionner une réponse";
-                    }
-                } 
-                $_SESSION['progress_value'] = getProgress($php_SSID);
-                $title = "Questions";
-                $question = loadQuestion($php_SSID);
-                if(!empty($question)){
-                    require('views/templates/form/s1-questions.view.php');
-                }else{
-                    if($_SESSION['progress_value']==100){
-                        header('Location:index.php?page=result');
-                    }else{
-                        $erreur = "La session de test est invalide";
-                        require('views/page-erreur.view.php');
-                    }
-                }
-
-                break;     
-            case 'step3':
-                $title = "Formulaire DO-03";
-                require('views/templates/form/s3-oper-construct.view.php');
-                break;                                       
-            default:
-                # code...
-                break;
+        $title = "Diagnostic'Compétences";
+        if(!empty($_POST['ID_reponse'])){
+            if(updateSession($_POST['ID_reponse'], $php_SSID) == false){
+                $erreur = "Veuillez sélectionner une réponse";
+            }
         } 
+        $_SESSION['progress_value'] = getProgress($php_SSID);
+        $question = loadQuestion($php_SSID);
+        if(!empty($question)){
+            require('views/templates/form/questions.view.php');
+        }else{
+            if($_SESSION['progress_value']==100){
+                header('Location:index.php?page=result');
+            }else{
+                $erreur = "La session de test est invalide";
+                require('views/page-erreur.view.php');
+            }
+        }
+
+
+
         $content = ob_get_clean();
         require("views/base.view.php");
     }
