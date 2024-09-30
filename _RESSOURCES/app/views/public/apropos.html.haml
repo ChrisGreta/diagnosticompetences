@@ -1,0 +1,49 @@
+%h1
+  A propos
+%img.image-deco{ :src => "/dc-theme/images/bamboo.png" }
+.col1
+  %h2
+  %p
+    Cet outil a été conçu par le&nbsp;
+    %a{ :href => "http://cri.velay.greta.fr/" }><
+      CRI-Greta du Velay
+    , dans le cadre de l'action&nbsp;
+    %a{ :href => "http://www.terremvie.net" }><
+      Terr'Em Vie
+    \ avec le soutien du Fonds social européen. Vous pouvez contacter les auteurs sur
+    %a{ :href => "/public/contact", :title => "Page de contact" }
+      cette page.
+  %p
+    Les questions ont été rédigées par une psychologue et des formateurs du Greta du Velay. Les résultats à ces questions pondèrent les différents domaines de compétence.
+    Un ensemble de calculs permet ensuite de produire le rapport et le graphe araignée.
+  %p
+    La réalisation technique a été assurée par <a href="http://conseil-recherche-innovation.net/le-cri/jerome-combaz">Jérôme Combaz</a>, à l'aide d'outils open source. Ingénierie pédagogique par <a href="http://conseil-recherche-innovation.net/le-cri/pierre-l-carrolaggi">Pierre Carrolaggi</a>.
+
+.col2{ :style => "margin-left: 4em" }
+  %h2
+    Infos techniques
+  %p
+    Ce site web a été développé sur le&nbsp;
+    %a{ :href => "http://rubyonrails.org/" }><
+      framework Rails
+    -# = '(' + Rails::VERSION::STRING + ')'
+    &nbsp;avec le&nbsp;
+    %a{ :href => "http://www.ruby-lang.org/fr/" }><
+      language Ruby
+    \.
+  %p
+    Le thème graphique a été inspiré par&nbsp;
+    %a{ :href => "http://hicksdesign.co.uk/" }><
+      Hicksdesign
+    , qui a réalisé le site&nbsp;
+    %a{ :href => "http://caminobrowser.org/" }><
+      caminobrowser.org
+    , et dont le contenu est diffusé sous licence CreativeCommons.
+  %p
+    %strong
+      A ce jour,
+      = DcSession.find(:all).size + LIE_SUBSCRIBERS_NUMBER
+      utilisateurs se sont inscrits
+      et ont utilisé D'C pendant plus de
+      = (DcSession.sum('temps_cumule') + LIE_SUBSCRIBERS_NUMBER * 35.minutes.seconds)/3600
+      heures.

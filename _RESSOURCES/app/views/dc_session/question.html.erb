@@ -1,0 +1,68 @@
+<div id="question">
+
+<div id="progression">
+<img src="/gruff/progression" />
+</div>
+
+<h2 class="<%= @question.intitule.size > 120 ? "question-longue" : "" %>"><%= @question.intitule %></h2>
+
+<ul class="reponses">
+<% 
+
+# liste les reponses
+rid = 0
+first = true
+
+@question.reponse.each do |r|
+%>
+    <li<%= !first ? " class=\"subline\"" : "" %> onclick="document.location='<%= url_for :action => "reponse", :rid => rid, :qid => @question.id %>'" onmouseover="this.style.cursor='pointer'"><%= link_to r[0], :action => "reponse", :rid => rid, :qid => @question.id %></li>
+
+<%
+    rid += 1
+    first = false
+end
+%>
+</ul>
+
+</div>
+
+<div id="appear_link" style="display: none;">
+<%= link_to_function("Faire un commentaire<br/>sur cette question") do |page|
+        page.visual_effect(:grow, "commentaire", :duration => 0.5, :direction => "top-left")
+        page.visual_effect(:fade, "appear_link", :duration => 0.5)
+    end
+%>
+</div>
+
+<div id="commentaire" class="col1" style="display: none;">
+    <h2>Un commentaire sur cette question ?</h2>
+    <% form_for(@comment) do |f| %>
+      <%= f.error_messages %>
+      <p>Aidez-nous à améliorer la qualité de D'C. Faites part de votre commentaire ci-dessous concernant la question qui vous est posée.
+      </p>
+      <p>
+        <%= f.text_area :body, :rows => 4 %>
+        <%= hidden_field_tag 'header', "Message à propos de : " + @question.intitule + " (question no. " + @question.id.to_s + ")" %>
+        <%= hidden_field_tag 'redirect', "/dc_session/question" %>
+      </p>
+      <p>
+        <%= f.submit "Envoyer ce commentaire" %>
+
+<%= button_to_function("Annuler") do |page|
+        page.visual_effect(:fade, "commentaire", :duration => 0.5)
+        page.visual_effect(:appear, "appear_link", :duration => 0.5)
+    end
+%>
+      </p>
+    <% end %>
+
+</div>
+<p>&nbsp;</p>
+<%=
+if RAILS_ENV == 'development' 
+    link_to "Tricher", :action => "cheat"
+end
+%>
+<div style="clear: both"></div>
+<%= link_to "Revenir à la question précédente", :action => "retour" unless DcSession.current.no_question == 0 %>
+

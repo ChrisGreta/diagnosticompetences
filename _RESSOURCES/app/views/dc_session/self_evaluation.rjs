@@ -1,0 +1,3 @@
+page.visual_effect(:BlindUp, "pasdaccord_#{@cc}", :duration => 0.5)
+#page.visual_effect(:BlindDown, "pasdaccord_link_#{@cc}", :duration => 0.5)
+page.replace_html("self_eval_stars_#{@cc}", "Mon évaluation &nbsp;" + get_stars(DcSession.current.self_eval[@cc], 12))

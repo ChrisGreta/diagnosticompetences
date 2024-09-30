@@ -1,0 +1,58 @@
+<% if browser_is? :ie6 or browser_is? :ie5 or browser_is? :ie55 %>
+<div id="get_firefox" style="background-color: white; margin: 1em 0; padding: 0.5em; border: 2px solid #1B387A; font-weight: bold; font-size: 110%;">
+Le navigateur que vous utilisez semble ancien. Vous devriez essayer Firefox, un logiciel libre, gratuit et performant !
+<a href="http://www.mozilla.com/fr/firefox?from=sfx&uid=0&t=333"><img border="0" alt="Spreadfirefox Affiliate Button" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox3/French/fx-FR1-110x32.png" /></a>
+</div>
+<% end %>
+<div style="padding-top: 2em;">
+<div class="col1">
+
+<!--
+<div style="border: 2px solid #933; padding: 0.5em">
+<strong>Information destinée à l'utilisateur "Dominique"</strong> : veuillez recontacter le CRI, votre mail est invalide et n'a pas permis de vous répondre...
+</div>
+-->
+
+    <h2>Comment cela fonctionne ?</h2>
+    <p>
+      Réfléchir à ses compétences et ses centres d'intérêt n'est pas toujours facile.
+      C'est pourtant un travail nécessaire pour rechercher un emploi ou pour évoluer. Cette réflexion est également indispensable si l'on souhaite créer un portfolio et mieux parler de soi lors d'un entretien.
+    </p>
+    <p>
+<em>Diagnosti'Compétences (D'C)</em> vous aide dans ce travail. A partir de <%= NB_QUESTIONS %> questions, un profil de vos compétences sera établi.
+Rien de magique, <em>D'C</em> n'est pas devin : il vous aide seulement à découvrir de façon ludique ce que vous auriez pû savoir par un travail sur vous-même.
+    </p>
+    <p>
+      Le rapport que vous obtiendrez au final n'est cependant qu'une indication. Il permettra de continuer d'affiner votre recherche sur vos compétences, seul ou accompagné par un conseiller.
+    </p>
+
+</div>
+
+<div class="col2">
+    <h2>Mode d'emploi</h2>
+    <p>
+Pour utiliser <em>D'C</em>, <%= link_to "vous devez vous inscrire (gratuit)", :controller => "public", :action => "guessit" %>. Cela donne accès à un espace personnel.
+    <p>
+Vous devrez ensuite répondre au questionnaire.
+Comme cela peut être long, vous pouvez étaler ce travail sur plusieurs séances. Votre mot de passe vous permet de <%= link_to "retourner dans votre espace personnel", :controller => "goldberg/auth", :action => "login" %>. 
+    </p>
+    <p>
+    Une fois votre rapport établi, vous pourrez réagir en faisant votre propre évaluation, selon votre estimation. Tous ces éléments devront être discutés ensuite avec votre accompagnateur.  
+    </p>
+
+</div>
+
+<div class="col3 rbox clear">
+    <div><div>
+        <h4>Le rapport</h4>
+        <p>D'C donne un rapport indicatif à la personne qui se teste.</p>        
+        <a href="/public/rapport"><img src="images/rapport.png" style="width: 160px; margin-bottom: 1em;" alt="Exemple de rapport"></a>
+        <p><a href="/public/rapport">&gt;&gt;&gt; Voir l'exemple</a></p>
+    </div></div>
+</div>
+
+</div>
+
+<div id="compteur">
+<span class="no"><%= DcSession.find(:all).size + LIE_SUBSCRIBERS_NUMBER %></span> <span class="inscrits">inscrit(e)s</span>
+</div>

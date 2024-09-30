@@ -1,0 +1,107 @@
+.rapport
+  %h1
+    Votre rapport
+  %img.image-deco{ :src => "/dc-theme/images/rapport-plein.png" }
+  %ul
+    %li
+      Identifiant :
+      %strong
+        = DcSession.current.user.name.capitalize
+    %li
+      Questionnaire achevé le :
+      %strong
+        = DcSession.current.date_questionnaire.strftime("%d/%m/%Y à %Hh%M")
+
+  - if ENV['RAILS_ENV'] == 'development'
+    %p
+      %a{ :href => "/dc_session/reset" }
+        Tout effacer et recommencer
+    
+  %h2 Carte des compétences clés
+  %p
+    Ce graphique montre les tendances qui caractérisent vos compétences,
+    les unes par rapport aux autres. Une compétence proche du centre est
+    moins présente qu'une compétence proche de l'extérieur. Un graphique "rond"
+    indique un certain équilibre dans vos domaines d'intérêt ou de compétence.
+    Un graphique "épineux" indique que certaines compétences sont plus présentes que d'autres.
+    Les résultats ne sont cependant qu'indicatifs.
+    %strong
+      De même, ce graphique ne juge pas de ce qui est bien ou pas bien.
+      Il peut vous aider à connaître les compétences à développer et celles sur lesquelles
+      vous pouvez vous appuyer plus facilement pour construire votre e-portfolio.
+
+  %img#spider{ :title => "Carte des compétences clés", :src => "/gruff/rapport", :alt => "Ce graphique toile d'araign\303\251e montre les tendances qui caract\303\251risent vos comp\303\251tences" }
+
+  %br
+
+  %h2 Compétences détaillées
+
+  %p
+    %em
+      %img{ :src => "/images/star_on.png", :style => "display: inline; width: 12px; height: 12px; margin: 0; padding: 0;" }
+      Votre niveau de maîtrise ou d'intérêt pour la compétence est indiqué par le nombre d'étoiles.
+
+  - form_tag "/dc_session/self_evaluation" do
+
+    :ruby
+      haml_concat rapport_competence("CEF",
+        "La communication dans la langue maternelle est la faculté d’exprimer des pensées, sentiments et faits sous forme à la fois orale et écrite (écouter, parler, lire et écrire), et d’avoir des interactions linguistiques appropriées dans toutes les situations de la vie sociale et culturelle, dans l’éducation et la formation, au travail, dans la vie privée et pendant les loisirs.",
+        [
+          [0.3,"Le français ne semble pas être votre tasse de thé ! C'est pourtant indispensable. Si vous êtes effectivement un peu faible dans ce domaine, pensez à vous améliorer dans ce sens."],
+          [0.7,"Pas de problème particulier dans ce domaine, vous ne semblez cependant pas être un littéraire chevroné."],
+          [1.0,"Vous semblez avoir de très bonnes compétences dans ce domaine. Pensez à mettre cela en avant dans votre CV ou votre portfolio."]
+        ])
+        
+      haml_concat rapport_competence("CLE",
+        "La communication en langue étrangère partage globalement les mêmes compétences de base que la communication dans la langue maternelle: elle s’appuie sur  l’aptitude à comprendre, exprimer et interpréter des pensées, des sentiments et des faits, sous  forme à la fois orale et écrite (écouter, parler, lire et écrire) dans diverses situations de la vie  en société, au travail, dans la vie privée, pendant les loisirs, dans le cadre de l’éducation et de  la formation, selon les désirs et les besoins.",
+        [
+          [0.3,"Les langues ne sont pas votre fort ! Ce n'est pas indispensable de connaitre plusieurs langues. Ceci-dit, connaître un minimum d'anglais est toujours utile. Pensez-y..."],
+          [0.7,"Vous semblez avoir quelques aptitudes en langues. Vous pouvez les mettre en valeur dans votre CV ou portfolio, en précisant pour chaque langue votre niveau de maîtrise."],
+          [1.0,"Vous semblez avoir de bonnes compétences en langues. C'est vraiment un atout. Pensez à mettre cela en avant dans votre CV ou votre portfolio."]
+        ])
+
+      haml_concat rapport_competence("CUM",
+        "La culture mathématique est l’aptitude à se servir de l’addition, de la soustraction, de la  multiplication, de la division et des fractions, sous forme de calcul mental et par écrit, pour  résoudre divers problèmes de la vie quotidienne. L’accent est mis davantage sur le processus  et l’activité que sur le savoir. Les compétences mathématiques impliquent, à des degrés  différents, la capacité et la volonté d'utiliser des modes mathématiques de pensée (réflexion  logique et dans l'espace) et de représentation (formules, modèles, constructions,  graphiques/diagrammes). Les compétences scientifiques se réfèrent à la capacité et à la volonté d’employer les  connaissances et méthodologies utilisées pour expliquer le monde de la nature afin de poser  des questions et d’apporter des réponses étayées. La technologie est perçue comme  l’application de ces connaissances et de ces méthodologies pour répondre aux désirs et  besoins de l’homme. Ces deux domaines de compétences supposent une compréhension des  changements induits par l’activité humaine et de la responsabilité de tout individu en tant que  citoyen.",
+        [
+          [0.3,"Les maths vous sont un peu étrangères, n'est-ce pas ? On peut très bien vivre sans, mais sachez tout de même qu'elles sont parfois utiles dans la vie quotidienne..."],
+          [0.7,"Les maths, ce n'est pas votre vocation mais vous vous y intéressez si besoin. Pourquoi ne pas essayer de valoriser un peu plus vos connaissances dans ce domaine ?"],
+          [1.0,"Vous semblez avoir de bonnes compétences en maths, c'est peut-être un aspect fort de vos compétences. Pensez à mettre cela en avant dans votre CV ou votre portfolio, et réfléchissez aux applications possibles de cette compétence au regard des autres domaines."]
+        ])
+
+      haml_concat rapport_competence("CUN",
+        "La culture numérique implique l’usage sûr et critique des technologies de la société de l’information (TSI) au travail, dans les loisirs et dans la communication. La condition préalable est la maîtrise des TIC : l’utilisation de l’ordinateur pour obtenir, évaluer,  stocker, produire, présenter et échanger des informations, et pour communiquer et participer  via l’Internet à des réseaux de collaboration.",
+        [
+          [0.3,"Ca ne vous intéresse pas ? Ce n'est pas indispensable pour vivre mais cela peut être utile. Essayer d'avoir un minimum de culture numérique, même si vous n'êtes pas pratiquant chevronné."],
+          [0.7,"L'informatique ne vous rend pas allergique ! Vous semblez y porter un certain intérêt, sans être un chevronné. Pensez à ce que vous maîtrisez dans ce domaine, et en quoi cela peut s'appliquer aux besoins actuels pour l'emploi. Valorisez ceci dans votre CV ou votre portfolio."],
+          [1.0,"Vous semblez apprécier les technologies. Même si vous pratiquez essentiellement l'informatique ludique, peut-être que vos connaissances peuvent être très utiles dans le milieu professionnel. Elles font de vous quelqu'un de potentiellement créatif avec ces nouveaux outils. Valorisez ceci dans votre CV ou votre portfolio."]
+        ])
+
+      haml_concat rapport_competence("AAA",
+        "C'est l’aptitude à entreprendre et poursuivre un  apprentissage. L’individu devrait être capable d’organiser son propre apprentissage, de gérer  son temps et ses informations avec efficacité, tant isolément que collectivement. Il devrait  connaître ses propres méthodes d’apprentissage et ses besoins, les offres d’éducation et de  formation, et être capable de surmonter des obstacles afin d’accomplir son apprentissage avec  succès. Cela suppose acquérir, traiter et assimiler de nouvelles connaissances et aptitudes, et  chercher et utiliser des conseils. “Apprendre à apprendre” amène les apprenants à s’appuyer  sur les expériences d’apprentissage et de vie antérieures de manière à utiliser et appliquer les  nouvelles connaissances et aptitudes dans divers contextes - dans la vie privée et  professionnelle, dans le cadre de l’éducation et de la formation. La motivation et la confiance  dans sa propre capacité sont des éléments fondamentaux.",
+        [
+          [0.5,"Vous semblez peu conscient de l'intérêt d'apprendre à apprendre. Pourtant c'est très important. Il existe de nombreuses ressources pour s'informer, se former, se documenter. Essayer d'en parler avec la personne qui vous assiste dans votre parcours, afin de voir comment vous pouvez améliorer votre façon d'apprendre au quotidien."],
+          [1.0,"Vous semblez conscient de l'intérêt d'apprendre à apprendre. C'est très important. Cela peut vouloir dire que vous êtes assez autonome et capable d'absorber des connaissances à partir de votre activité. Parlez-en avec la personne qui vous assiste dans votre parcours. Elle pourra vous aider à valoriser ceci dans votre CV ou votre portfolio."]
+        ])
+
+      haml_concat rapport_competence("CIS",
+        "Ces compétences comprennent toutes les formes de comportement devant être  maîtrisées par un individu pour pouvoir participer de manière efficace et constructive à la vie  sociale et professionnelle, notamment dans des sociétés de plus en plus diversifiées, et pour  résoudre d’éventuels conflits. Les compétences civiques permettent à l’individu de participer  pleinement à la vie civique grâce à la connaissance des notions et structures sociales et  politiques et à une participation civique active et démocratique.",
+        [
+          [0.42,"Etes-vous un peu renfermé sur vous même ? Peu intéressé par ce qui se passe autour de vous ? C'est ce que semble indiquer vos réponse aux questions. Peut-être devriez-vous plus vous impliquer dans des associations ou autres formes de vie sociale."],
+          [1.0,"Vous semblez assez ouvert sur le monde extérieur. Peut-être êtes-vous impliqué dans des associations ou autres formes de vie sociale. Pensez à valoriser ceci dans votre CV ou votre portfolio."]
+        ])
+
+      haml_concat rapport_competence("EDE",
+        "L’esprit d’entreprise se réfère à l’aptitude d’un individu à passer des idées aux  actes. Il suppose de la créativité, de l’innovation et une prise de risques, ainsi que la capacité  de programmer et de gérer des projets en vue de la réalisation d’objectifs. Cette compétence  est un atout pour tout le monde dans la vie de tous les jours, à la maison et en société, pour les  salariés conscients du contexte dans lequel s'inscrit leur travail et en mesure de saisir les  occasions qui se présentent, et elle est le ferment de l’acquisition de qualifications et de  connaissances plus spécifiques dont ont besoin les chefs d’entreprise qui créent une activité  sociale ou commerciale.",
+        [
+          [0.5,"Etes-vous entreprenant, au sens du texte ci-dessus ? Savez-vous passer des idées aux actes ? Le test semble dire que vous êtes plutôt en retrait dans ce domaine. Voyez comment les choses peuvent être améliorées, si vous-même pensez que votre test dit vrai."],
+          [1.0,"Vous semblez avoir un certain esprit d'entreprise, au sens du texte ci-dessus. Il semble que vous sachiez passer des idées aux actes. Essayer de voir chez vous ce qui peut justifier cela et être valorisé dans le CV ou le portfolio."]
+        ])
+
+      haml_concat rapport_competence("ECU",
+        "Appréciation de l’importance de l’expression créatrice d’idées, d’expériences et  d’émotions sous diverses formes, la musique, les arts du spectacle, la littérature et les arts  visuels.",
+        [
+          [0.42,"Est-ce que l'expression culturelle vous concerne vraiment ? Peu semble-t-il. C'est pourtant important. Voyez avec votre accompagnant comment impulser des choses dans ce domaine."],
+          [1.0,"Vous semblez avoir un certain intérêt pour l'expression culturelle de façon générale. Voyez précisément quelles de vos activités peuvent être valorisées pour votre vie professionnelle."]
+        ])
+
+  %div{ :style => "clear: left;" }

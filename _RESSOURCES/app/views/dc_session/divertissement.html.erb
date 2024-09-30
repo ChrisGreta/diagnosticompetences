@@ -1,0 +1,12 @@
+<h1>Divertissement !</h1>
+<p class="divertissement col12">
+Cela fait <%= DELAI_DIVERTISSEMENT %> minutes que vous répondez aux questions.
+Nous vous proposons un petit divertissement...
+N'oubliez pas de revenir sur cette page pour continuer le questionnaire !</p>
+<p>
+<%= @divertissement.description %>
+</p>
+<ul>
+<li><%= link_to @divertissement.lien, @divertissement.url, :popup => true %> (s'ouvre dans une autre fenêtre)</li>
+<li><%= link_to "Continuer le questionnaire", :action => "question", :resetdiv => 1 %></li>
+</ul>

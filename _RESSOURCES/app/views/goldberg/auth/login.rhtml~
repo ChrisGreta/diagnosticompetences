@@ -1,0 +1,40 @@
+<h1>Connexion</h1>
+<img class="image-deco" src="/dc-theme/images/password.png">
+<div class="col12">
+<% if flash[:notice] -%>
+   <div id="ErrorExplanation"><%= flash[:notice] %></div>
+<% end -%>
+
+<p> Veuillez entrer votre pseudo et votre mot de passe.</p>
+
+<% form_tag :action => 'login' do -%>
+
+    <table class="dc">
+
+    <tr>
+    <th> Pseudo </th>
+    <td><%= text_field 'login', 'name', :size => 14 %></td>
+    </tr>
+
+    <tr>
+    <th> Mot de passe </th>
+    <td> <%= password_field 'login', 'password', :size => 10 %> </td>
+    </tr>
+
+    <tr>
+    <th> </th>
+    <td> <%= submit_tag "Connexion" %> </td>
+    </tr>
+
+    </table>
+
+<% end -%>
+
+<br/>
+<h2> Mot de passe oublié ? </h2>
+<p><%= link_to "Cliquez ici", :controller => 'goldberg/users', 
+         :action => 'forgot_password' %> pour connaître la procédure.</p>
+
+</div>
+
+

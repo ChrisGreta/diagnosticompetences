@@ -1,0 +1,8 @@
+<h1>Bienvenue</h1>
+<img class="image-deco" src="/dc-theme/images/source.png">
+<div class="col12">
+<p>Votre inscription s'est bien déroulée ! Notez en lieu sûr votre pseudonyme (<strong><%= DcSession.current.user.name %></strong>) et votre mot de passe, ils vous permettront de revenir dans cet espace personnel.</p>
+<p>Vous allez maintenant commencer le questionnaire. Ce travail peut être long, car il y a <%= NB_QUESTIONS %> questions. A chaque fois vous devez choisir une réponse parmi celles proposées. Si aucune ne vous semble parfaite,
+ choisissez tout de même celle qui se rapproche le plus de ce que vous pensez. Toutes les <%= DELAI_DIVERTISSEMENT %> minutes nous vous proposerons un petit divertissement pour s'aérer l'esprit : n'y passez pas plus de 10 minutes !</p>
+<p><%= link_to "Commencer le questionnaire", :action => "question" %></p>
+</div>

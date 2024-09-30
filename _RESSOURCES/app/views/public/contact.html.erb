@@ -1,0 +1,40 @@
+<h1>Contact</h1>
+
+<img class="image-deco" src="/dc-theme/images/stylo.png">
+
+<div class="col12">
+
+<p>Une remarque ? Un problème ? Pour contacter les auteurs de cet outil, merci d'utiliser le formulaire ci-dessous.</p>
+
+<% if flash[:notice] -%>
+   <div id="ErrorExplanation"><%= flash[:notice] %></div>
+<% end -%>
+  
+<% form_tag :action => 'contact' do-%>
+
+    <table class="dc">
+
+    <tr>
+    <th>Nom ou courriel (si vous souhaitez une réponse)</th>
+    <td><%= text_field_tag 'from', @from, :size => 24 %></td>
+    </tr>
+
+    <tr>
+    <th style="vertical-align: top;">Message</th>
+    <td><%= text_area_tag 'body', @body, :size => '40x8' %></td>
+    </tr>
+
+    <tr>
+    <th> </th>
+    <td><%= captcha_block "Veuillez écrire ici le code affiché ci-dessous : " %></td>
+    </tr>
+
+    <tr>
+    <th> </th>
+    <td> <%= submit_tag "Envoyer" %> </td>
+    </tr>
+
+    </table>
+
+<% end -%>
+</div>

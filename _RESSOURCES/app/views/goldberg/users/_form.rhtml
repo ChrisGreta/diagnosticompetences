@@ -1,0 +1,54 @@
+<%= error_messages_for :user, :header_message => '', :message => '' %>
+
+<table class="dc">
+
+<tr>
+<th> Pseudo </th>
+<td><%= text_field 'user', 'name', :size => 14 %></td>
+</tr>
+
+<tr>
+<th> Courriel (facultatif) </th>
+<td><%= text_field 'user', 'email', :size => 24  %></td>
+</tr>
+
+<% if not @self_reg -%>
+<tr>
+<th> Role </th>
+<td> <%= collection_select 'user', 'role_id', @roles, :id, :name %> </td>
+</tr>
+
+<tr>
+<th> Registration Confirmation <br />Required </th>
+<td><%= check_box 'user', 'self_reg_confirmation_required' %></td>
+
+<tr>
+<th> Start Path </th>
+<td><%= text_field 'user', 'start_path' %></td>
+</tr>
+<% end -%>
+
+<% if @password_change -%>
+<tr>
+<th> Old Password </th>
+<td> <%= password_field 'user', 'old_password' %> </td>
+</tr>
+<% end -%>
+
+<tr>
+<th> <% if @password_change then %> New <% end %>Mot de passe </th>
+<td> <%= password_field 'user', 'clear_password', :size => 10 %> <strong style="color: #900">Retenez (ou notez en lieu sûr) ce mot de passe</strong></td>
+</tr>
+
+<tr>
+<th> Confirmez le mot de passe </th>
+<td> <%= password_field 'user', 'confirm_password', :size => 10 %> </td>
+</tr>
+
+
+<tr>
+<th> </th>
+<td> <%= submit_tag "Je m'inscris" %> </td>
+</tr>
+
+</table>

@@ -1,0 +1,19 @@
+<% if @self_reg -%>
+<h1> Inscription </h1>
+<img class="image-deco" src="/dc-theme/images/access.png">
+<div class="col12">
+<p> Pour vous inscrire, veuillez donner un pseudonyme et un mot de passe. Votre courriel (facultatif) nous permettra de vous informer des évolution de ce site, et ne sera pas diffusé.</p>
+<% else -%>
+<h1>Créer un utilisateur</h1>
+<% end -%>
+<div>
+<% form_tag :action => (@self_reg ? 'self_create' : 'create') do %>
+  <%= render :partial => 'form' %>
+<% end %>
+</div>
+<br/>
+<% if @self_reg -%>
+<% else -%>
+<%= link_to 'Back', :action => 'list' %>
+<% end -%>
+</div>

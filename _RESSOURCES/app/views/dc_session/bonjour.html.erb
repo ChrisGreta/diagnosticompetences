@@ -1,0 +1,22 @@
+<h1>Bonjour <%= DcSession.current.user.name.capitalize %></h1>
+<img class="image-deco" src="/dc-theme/images/source.png">
+<div class="col12">
+<p>Bienvenue dans votre espace personnel.</p>
+
+<% if DcSession.current.rapport? %>
+
+<%= render :partial => "fin_questionnaire" %>
+<ul>
+<li><%= link_to "Voir le rapport", :action => "rapport" %></li>
+</ul>
+
+<p>&nbsp</p>
+<p><em>Si vous le souhaitez vous pouvez <%= link_to "revoir les divertissements", :action => "divertissements" %>.</em></p>
+
+<% else %>
+
+<p>Vous n'avez pas fini de répondre aux questions. Courage, il en reste <%= DcSession.current.questions.size - DcSession.current.no_question %> !</p>
+<p><%= link_to "Continuer le questionnaire", :action => "question" %><p>
+
+<% end %>
+</div>
