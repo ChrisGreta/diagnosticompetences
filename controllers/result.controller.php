@@ -24,7 +24,7 @@
             }
             //echo "<hr>".$code.":".$somme."/".count($array_result_0[$code]);            
             //ignore certaines compétences, abandonnées en cours de projet ?
-            $categ_exclude = array("CDC","CDA","MAA","CDE","IVQ","GDS","CAD","OSA","IDD","ECO");
+            $categ_exclude = array("CDC","CDA","MAA","CDE","IVQ","GDS","CAD","OSA","IDD","ECO","ESC");
             if (!in_array($code, $categ_exclude)){
                 $array_result[$code]= round($somme/count($array_result_0[$code]),2);
             }

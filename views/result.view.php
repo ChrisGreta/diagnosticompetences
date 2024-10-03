@@ -17,38 +17,18 @@
             <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
                 <div class="grid grid-cols-3 gap-3 mb-2">
                 <dl class="bg-orange-50 dark:bg-gray-600 rounded-lg flex flex-col items-center justify-center h-[78px]">
-                    <dt class="w-8 h-8 rounded-full bg-orange-100 dark:bg-gray-500 text-orange-600 dark:text-orange-300 text-sm font-medium flex items-center justify-center mb-1">0</dt>
-                    <dd class="text-orange-600 dark:text-orange-300 text-sm font-medium">A faire</dd>
+                    <dt class="w-16 h-10 rounded-full bg-orange-100 dark:bg-gray-500 text-orange-600 dark:text-orange-300 text-sm font-medium flex items-center justify-center mb-1">5 mn 33s</dt>
+                    <dd class="text-orange-600 dark:text-orange-300 text-sm font-medium">Temps</dd>
                 </dl>
                 <dl class="bg-teal-50 dark:bg-gray-600 rounded-lg flex flex-col items-center justify-center h-[78px]">
-                    <dt class="w-8 h-8 rounded-full bg-teal-100 dark:bg-gray-500 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center justify-center mb-1">80</dt>
-                    <dd class="text-teal-600 dark:text-teal-300 text-sm font-medium">Correctes</dd>
+                    <dt class="w-8 h-8 rounded-full bg-teal-100 dark:bg-gray-500 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center justify-center mb-1">100</dt>
+                    <dd class="text-teal-600 dark:text-teal-300 text-sm font-medium">%</dd>
                 </dl>
                 <dl class="bg-blue-50 dark:bg-gray-600 rounded-lg flex flex-col items-center justify-center h-[78px]">
                     <dt class="w-8 h-8 rounded-full bg-blue-100 dark:bg-gray-500 text-blue-600 dark:text-blue-300 text-sm font-medium flex items-center justify-center mb-1">133</dt>
                     <dd class="text-blue-600 dark:text-blue-300 text-sm font-medium">Répondus</dd>
                 </dl>
                 
-                </div>
-                <button data-collapse-toggle="more-details" type="button" class="hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center">
-                    Voir plus de détail <svg class="w-2 h-2 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                </svg>
-                </button>
-                <div id="more-details" class="border-gray-200 border-t dark:border-gray-600 pt-3 mt-3 space-y-2 hidden">
-                <dl class="flex items-center justify-between">
-                    <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Achévement :</dt>
-                    <dd class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300">
-                        100%
-                    </dd>
-                </dl>
-                <dl class="flex items-center justify-between">
-                    <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Achévement :</dt>
-                    <dd class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300">
-                        63% (80/133)
-                    </dd>
-                </dl>
-
                 </div>
             </div>
         </div>
@@ -57,62 +37,53 @@
         <div class="basis-1/3 ">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white mb-4">Compétences</h5>
                 <ul class="text-sm"> 
+                    <li><strong>AAA</strong> - Apprendre à apprendre</li>  
                     <li><strong>CEF</strong> - Communication en Français</li>
+                    <li><strong>CIS</strong> - Compétences interpersonnelles; interculturelles et sociales</li>
                     <li><strong>CLE</strong> - Communication dans une langue étrangère</li>
                     <li><strong>CUM</strong> - Culture mathématique</li>
                     <li><strong>CUN</strong> - Culture numérique</li>
-                    <li><strong>AAA</strong> - Apprendre à apprendre</li>
-                    <li><strong>CIS</strong> - Compétences interpersonnelles; interculturelles et sociales</li>
-                    <li><strong>EDE</strong> - Esprit d'entreprise</li>
+                    
                     <li><strong>ECU</strong> - Expression culturelle</li>
+                    <li><strong>EDE</strong> - Esprit d'entreprise</li>                    
+
+                    <li><strong>SET</strong> - Sciences et technologie </li>
                 </ul>
-            <p class="text-xs justify-normal">
+              
+            
+        </div>
+        <!-- radar Chart -->
+        <div class="basis-2/3" id="radar-chart">
+        </div>
+        <button data-tooltip-target="tooltip-default" type="button" class="w-10 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg 
+        text-sm p-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
+            </div>      
+        </button>
+        <div id="tooltip-default" role="tooltip" class="w-96 absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        <p class="text-xs justify-normal">
                 Ce graphique montre les tendances qui caractérisent vos compétences, les unes par rapport aux autres. Une compétence proche du centre est moins présente qu'une compétence proche de l'extérieur. Un graphique "rond" indique un certain équilibre dans vos domaines d'intérêt ou de compétence.
                 Un graphique "épineux" indique que certaines compétences sont plus présentes que d'autres.
                 Les résultats ne sont cependant qu'indicatifs. De même, ce graphique ne juge pas de ce qui est bien ou pas bien. Il peut vous aider à connaître les compétences à développer et celles sur lesquelles  vous pouvez vous appuyer plus facilement pour construire votre e-portfolio.
             </p>
-        </div>
-        <!-- radar Chart -->
-        <div class="basis-2/3" id="radar-chart"></div>
+          <div class="tooltip-arrow" data-popper-arrow></div>
     </section>        
     <section class="bg-white dark:bg-gray-900 grid grid-cols-2 gap-2 md:grid-cols-1">
 
         <!-- BAR Chart -->
         <div id="bar-chart"></div>
-        <div>        
-            <!-- Radial Chart -->
-            <div class="py-6" id="radial-chart"></div>
-
-                        <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-                            <div class="flex justify-between items-center pt-5">
-                            <!-- Button -->
-                            
-                            
-                            <a
-                                href="#"
-                                class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-                                Progress report
-                                <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                </svg>
-                            </a>
-                            </div>
-                        </div>
-                </div>  
-            </div>
-        </div>
+        <div id="column-chart"></div>
     
     </section>
     <section>
 
     <?php
 
-    $labels     = getLabels();
-    $label_desc = getLabels("descriptif");
-    foreach ($labels as $code => $label) {
-        # code...
-        
-        switch ($array_analyse[$code]['niveau']) {
+    $categories = getCategories();
+    foreach ($categories as $id => $categorie) {       
+        switch ($array_analyse[$categorie['Code_Categ']]['niveau']) {
           case 2:
             $colorNiveau = "bg-green-50 dark:bg-gray-800 dark:text-green-400 text-green-800";
             break;
@@ -125,15 +96,14 @@
             break;
         }
         ?>
-        <h2 class="text-lg font-bold"><?= $label?></h2>
-        <?= $label_desc[$code]; ?>
+        <h2 class="text-lg font-bold"><?= $categorie['Libelle_Categorie']?></h2>
+        <?= $categorie['description']; ?>
 
 
         <div class="p-4 mb-4 text-sm  rounded-lg <?= $colorNiveau;?>" role="alert">
             <span class="font-medium">
             <?php
-            getResultats("descriptif");
-            echo $array_analyse[$code]['libelle'];
+            echo $array_analyse[$categorie['Code_Categ']]['libelle'];
             ?>
           </span> 
         </div>
@@ -162,72 +132,8 @@
     chart.render();
   }
 
-//radial-chart
-const RadialChartOptions = () => {
-    return {
-      series: [<?=$str_result_point?>],
-      colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#FD008C","#16BDCA", "#FDBA8C", "#FDBA8C", "#31C48D"],
-      chart: {
-        height: "380px",
-        width: "100%",
-        type: "radialBar",
-        sparkline: {
-          enabled: true,
-        },
-      },
-      plotOptions: {
-        radialBar: {
-          track: {
-            background: '#E5E7EB',
-          },
-          dataLabels: {
-            show: false,
-          },
-          hollow: {
-            margin: 0,
-            size: "50%",
-          }
-        },
-      },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 2,
-          right: 2,
-          top: -23,
-          bottom: -20,
-        },
-      },
-      labels: [<?='"'.$str_code_point.'"'?>],
-      legend: {
-        show: true,
-        position: "bottom",
-        fontFamily: "Inter, sans-serif",
-      },
-      tooltip: {
-        enabled: true,
-        x: {
-          show: false,
-        },
-      },
-      yaxis: {
-        show: false,
-        labels: {
-          formatter: function (value) {
-            return value + '%';
-          }
-        }
-      }
-    }
-  }
-  
-  if (document.getElementById("radial-chart") && typeof ApexCharts !== 'undefined') {
-    const chart = new ApexCharts(document.querySelector("#radial-chart"), RadialChartOptions());
-    chart.render();
-  }
 
-
+//plot-chart
   const options = {
     series: [
       {
@@ -252,7 +158,7 @@ const RadialChartOptions = () => {
     },
     plotOptions: {
       bar: {
-        horizontal: true,
+        horizontal: false,
         columnWidth: "100%",
         borderRadiusApplication: "end",
         borderRadius: 6,

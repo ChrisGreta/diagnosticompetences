@@ -19,7 +19,12 @@ function login(){
         require('views/templates/user/login.view.php');
     }else{        
         $_SESSION['user_id'] = $check['ID'];
-        header("Location: index.php?page=dashboard");        
+
+        if($_SESSION['user_id'] == 1 ){
+            header("Location: index.php?page=admin");        
+        }else{
+            header("Location: index.php?page=dashboard");        
+        }
     }
 
     $content = ob_get_clean();

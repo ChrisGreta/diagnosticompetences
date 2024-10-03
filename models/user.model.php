@@ -68,10 +68,13 @@
     }
 
     function getSessions($user_id){
-        $sql = "SELECT US.utilisateur_id,US.session_id,count(`session_reponse_ID`) as nb_question,  (1-round(count(`session_reponse_ID`)/133,2)) as progress, US.session_debut, US.session_maj 
+        $sql = "SELECT US.utilisateur_id,US.session_id,count(`session_reponse_ID`) as nb_question,  (round(count(`session_reponse_ID`)/133,2)) as progress, US.session_debut, US.session_maj 
         FROM `session_reponses` SR INNER JOIN `utilisateur_session` US ON US.session_id = SR.session_ID 
-        WHERE US.utilisateur_id = $user_id and SR.reponse_id = 0 GROUP BY SR.`session_ID`
-        ORDER BY US.session_maj DESC;";
+        WHERE US.utilisateur_id = $user_id and SR.reponse_id != 0 ";
+        
+        $sql .= "GROUP BY SR.`session_ID` 
+                 ORDER BY US.session_maj DESC;";
+
         $resquery = mysqli_query($GLOBALS["conn"], $sql);
         $DATA = mysqli_fetch_all($resquery, MYSQLI_ASSOC);
         return $DATA;

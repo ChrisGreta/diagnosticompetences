@@ -19,3 +19,12 @@ EDE;0.5;Etes-vous entreprenant, au sens du texte ci-dessus ? Savez-vous passer d
 EDE;1.0;Vous semblez avoir un certain esprit d'entreprise, au sens du texte ci-dessus. Il semble que vous sachiez passer des idées aux actes. Essayer de voir chez vous ce qui peut justifier cela et être valorisé dans le CV ou le portfolio.
 ECU;0.42;Est-ce que l'expression culturelle vous concerne vraiment ? Peu semble-t-il. C'est pourtant important. Voyez avec votre accompagnant comment impulser des choses dans ce domaine.
 ECU;1.0;Vous semblez avoir un certain intérêt pour l'expression culturelle de façon générale. Voyez précisément quelles de vos activités peuvent être valorisées pour votre vie professionnelle.
+
+//ajouté le 01/10/2024
+SET;0.5;vous portez peut être peu d'intérêt à ce domaine ou vous avez peu d'expérience dans ce domaine, il serait intéressant de travailler avec votre formateur pour évaluer plus concrètement vos connaissances sur ce secteur et voir s'il est judicieux ou non de le détailler sur votre e-portfolio.
+SET;1.0;vous avez un minimum de connaissances et/ou d'expériences dans ce domaine, si vous souhaitez intégrer ce groupe de compétences dans votre e-portfolio, il serait judicieux de l'approfondir avec votre formateur.
+COC;0.5;vous portez peut être peu d'intérêt à ce domaine ou vous avez peu d'expérience dans ce domaine, il serait intéressant de travailler avec votre formateur pour évaluer plus concrètement vos connaissances sur ce secteur et voir s'il est judicieux ou non de le détailler sur votre e-portfolio.
+COC;1.0;vous avez un minimum de connaissances et/ou d'expériences dans ce domaine, si vous souhaitez intégrer ce groupe de compétences dans votre e-portfolio, il serait judicieux de l'approfondir avec votre formateur.
+
+
+

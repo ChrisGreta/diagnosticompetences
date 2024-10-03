@@ -14,17 +14,39 @@
                     <div class="max-w-sm p-6 w-72 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <h5 class="mb-2 font-xl font-bold tracking-tight text-gray-900 dark:text-white">Test du <?= $session['session_debut'];?></h5>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?=$session['session_id'];?></p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?= $session['nb_question'];?>/133</p>
+                        
                         <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: <?=$session['progress']*100;?>%"></div>
+                            <div class="bg-<?= ($session['progress'] == 1 ? "green" : "blue");?>-600 h-6 rounded-full" style="width: <?=$session['progress']*100;?>%">
+                                <p class="text-center w-full text-white font-medium"><?=$session['progress']*100;?>%</p>
+                            </div>
                         </div>
-                        <?= $session['nb_question'];?>
+                        
                         <br/>
-                        <a href="index.php?page=dc&session_id=<?= $session['session_id'];?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Reprendre
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </a>
+                        
+                            <?php 
+                            if ($session['progress'] == 1){
+                            ?>
+                            <a href="index.php?page=result&session_id=<?= $session['session_id'];?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Rapport&nbsp;&nbsp;
+                                <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5"/>
+                                </svg>
+
+                            </a>
+                            <?php
+                            }else{
+                            ?>
+                            <a href="index.php?page=dc&session_id=<?= $session['session_id'];?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Reprendre
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </a>
+                            <?php
+                            }
+                            ?>
+                        
                     </div>
                 <?php
                 }

@@ -21,20 +21,24 @@
 
     
     function adminDisplay(){
-        $title = "Administration des demandes Dommage Ouvrage";
-        require 'views/header.view.php';
-        $dos = getListDO();
-        if(!empty($_SESSION['user'])){
-            require 'views/dashboard.view.php';
-        }else{
-            if(!empty($_POST['password'])){
-                if($_POST['password'] == PASSWORD_ADMIN){
-                    $_SESSION['user']=session_id();
-                    header("Location: index.php?page=dashboard"); 
-                }
+
+
+        if(!empty($_GET['deletedc'])){
+            if(delete($_GET['deletedc']) == true){
+                $message_delete = "Diagnotic'compétences supprimé avec succès";
+            }else{
+                $message_delete = "Erreur lors de la suppression";
             }
-            require 'views/login.view.php';
-        }        
+        }
+        $title = "Administration";
+        require 'views/header.view.php';
+        
+        if($_SESSION['user_id'] == 1){
+            $dcs = getAllSessions();
+            require 'views/admin.view.php';
+        }else{
+            require 'views/templates/user/login.view.php';
+        }     
         require 'views/footer.view.php';
     }
 
