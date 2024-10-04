@@ -3,10 +3,13 @@
 
     //lecture des données contenues dans la base
     function check_login($email, $password){
-        $password = htmlspecialchars($password);
-        $sql = "SELECT ID FROM `utilisateur` where `email` ='$email' and `pass`=MD5('$password');";
+        $password = htmlspecialchars($password);  
+        $passwordmd5 = MD5($password);
+        $sql = "SELECT ID FROM `utilisateur` where `email` ='$email' and `pass`='$passwordmd5';";
+        echo $sql;
         $resquery = mysqli_query($GLOBALS["conn"], $sql);
         $DATA = mysqli_fetch_array($resquery, MYSQLI_ASSOC);
+        var_dump($DATA);
         return $DATA;
     }
 

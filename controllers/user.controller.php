@@ -53,8 +53,13 @@ function stepRegister($message =""){
     ob_start();
     $title = "Création de compte";
     if(!empty($_POST)){
+        $array_post = $_POST;
         $new_user = register_user($array_post);
-        var_dump($new_user);
+        if(is_numeric($new_user) ){
+            header("Location: index.php?page=login&new_user=".$new_user);
+        }else{
+            $message = $new_user;
+        }
     }
 
     require('views/templates/user/register.view.php'); 

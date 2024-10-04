@@ -6,6 +6,15 @@
                     <p class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                         Connexion    
                     </p>
+                    <?php
+                    if(!empty($_GET['new_user'])){
+                    ?>
+                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                        <span class="font-medium">Votre compte a été créé avec succès ! Veuillez vous connecter.</span> 
+                        </div>
+                    <?php    
+                    }            
+                    ?>        
                     <div class="w-full bg-white rounded-lg shadow-xl dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h2 class="text-sm font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
