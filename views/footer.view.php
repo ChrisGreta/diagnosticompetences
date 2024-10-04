@@ -2,7 +2,8 @@
         <p>Greta AUVERGNE - Conseil Recherche et Innovation @tous droits réservés</p>
         <?php
         if(DEBUG==true){
-            echo session_id();
+            echo session_id()."|";
+            echo $_SESSION['current_session'];
         } 
         ?>
     </footer>

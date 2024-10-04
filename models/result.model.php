@@ -23,9 +23,6 @@
                     WHERE `session_ID`='$php_SSID'";             
             $query = mysqli_query($GLOBALS["conn"], $sql);
             $resultats = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
-            //var_dump($resultats);
-            //echo  $sql;
         }catch (Exception $e) {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
             return false;
@@ -36,7 +33,10 @@
     function analyseResultat($cle_Competence, $points){
         
         try {
-            $sql = "SELECT session_resultat_libelle, session_resultat_niveau FROM `session_resultat` WHERE `session_resultat_code` LIKE '$cle_Competence' AND `session_resultat_points_max` >= $points ORDER BY `session_resultat_points_max` ASC LIMIT 0,1;";
+            $sql = "SELECT session_resultat_libelle, session_resultat_niveau 
+            FROM `session_resultat` 
+            WHERE `session_resultat_code` LIKE '$cle_Competence' AND `session_resultat_points_max` >= $points 
+            ORDER BY `session_resultat_points_max` ASC LIMIT 0,1;";
             $query = mysqli_query($GLOBALS["conn"], $sql);
             $session_resultat = mysqli_fetch_row($query);
         }catch (Exception $e) {
@@ -46,4 +46,15 @@
         return $session_resultat;
     }
 
+
+    function transformTime($secondes)
+    {
+        $minutes = floor($secondes / 60);
+
+        $sec -= $minutes * 60;
+
+        $hour = floor($min / 60);
+        $min -= $hour * 60;
+        return sprintf('%02d:%02d:%02d', $hour, $min, $sec);
+    }
 ?>

@@ -28,15 +28,11 @@
                     if($top == 1){
                         $sqlupdate = 'UPDATE `session_reponses` SET  `reponse_ID`='.$ID_reponse.',`categ_reponse_ID`="'.$point['name'].'",`points`='.$point['point'].'  WHERE   `question_ID`='.$current_question.';';                                      
                     }
-
-                    if(DEBUG == false){
-                        echo "<pre>";
-                            echo "<br>SQL:<strong>$sqlupdate</strong><br>";
-                        echo "</pre>";
-                    }
                     $query = mysqli_query($GLOBALS["conn"], $sqlupdate); 
                     $top++;          
                 }
+
+                updateDateSession($php_SSID);
             }else{
                 return false;
             }      
@@ -76,6 +72,23 @@
         return $session_id[0];
     }
 
+    function sessionIsValid($php_SSID, $user_ID){
+        try {
+            $sql = "SELECT `session_id` FROM `utilisateur_session` WHERE `session_id`='$php_SSID' and  `utilisateur_id`='$user_ID' ORDER BY `utilisateur_session`.`session_maj` DESC LIMIT 0,1;";
+            $query = mysqli_query($GLOBALS["conn"], $sql);
+            $session_id = mysqli_fetch_row($query);
+        }catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            return 0;
+        }        
+        if($session_id==null){
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
+
     function getProgress($php_SSID, $percent = true){
        
         try {
@@ -91,7 +104,6 @@
             if($percent == false){
                 $sql = $sqlNbRep;
             }
-            
             $query = mysqli_query($GLOBALS["conn"], $sql);
             $progress = mysqli_fetch_row($query);
             //echo  $sql;
@@ -137,4 +149,64 @@
     }
 
    
+    function updateDateSession($session_id, $maj = true){
+        try {
+            if($maj ==true){
+                $field= "`session_maj`"; 
+            }else{
+                $field= "`session_fin`"; 
+            }
+            $sqlupdate = "UPDATE `utilisateur_session` SET $field = CURRENT_TIME() WHERE `session_id` = '$session_id';";
+            $query = mysqli_query($GLOBALS["conn"], $sqlupdate); 
+        }catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            return false;
+        }  
+        return true;
+    }
 
+
+    function getSessions($user_id=null, $session_id=null){
+        $sql = "SELECT US.utilisateur_session_id, 
+        US.utilisateur_id,US.session_id,count(`session_reponse_ID`) as nb_question,  
+        (round(count(`session_reponse_ID`)/133,2)) as progress, 
+        DATE_FORMAT(US.session_debut, '%d/%m/%Y %H:%i:%s ') as session_debut, 
+        DATE_FORMAT(US.session_maj, '%d/%m/%Y %H:%i:%s ') as session_maj, 
+        DATE_FORMAT(US.session_fin , '%d/%m/%Y %H:%i:%s ')  as session_fin,
+        U.nom, U.prenom,
+        ROUND(time_to_sec((TIMEDIFF(US.session_fin, US.session_debut)))) as duree_secondes
+        FROM `session_reponses` SR 
+        INNER JOIN `utilisateur_session` US ON US.session_id = SR.session_ID 
+        INNER JOIN `utilisateur` U ON U.ID = US.utilisateur_id 
+        WHERE SR.reponse_id != 0 ";
+        
+        if($session_id != null){
+            $sql.= " AND US.session_id LIKE '$session_id' ";
+            $sql .= "GROUP BY SR.`session_ID`";
+            $query = mysqli_query($GLOBALS["conn"], $sql);
+            $session_id = mysqli_fetch_row($query);      
+            $DATA = array();
+            $DATA['utilisateur_session_id']     = $session_id[0];
+            $DATA['utilisateur_id']             = $session_id[1];
+            $DATA['session_id']                 = $session_id[2];
+            $DATA['nb_question']                = $session_id[3];
+            $DATA['progress']                   = $session_id[4];
+            $DATA['session_debut']              = $session_id[5];
+            $DATA['session_maj']                = $session_id[6];
+            $DATA['session_fin']                = $session_id[7];
+            $DATA['nom']                        = $session_id[8];
+            $DATA['prenom']                     = $session_id[9];
+            $DATA['duree_secondes']             = $session_id[10];
+        }else{
+            $sql.= " AND US.utilisateur_id = $user_id ";
+            $sql .= "GROUP BY SR.`session_ID` 
+            ORDER BY US.session_maj DESC;";
+
+            $resquery = mysqli_query($GLOBALS["conn"], $sql);
+            $DATA = mysqli_fetch_all($resquery, MYSQLI_ASSOC);            
+        }
+
+        return $DATA;
+        
+    }
+    

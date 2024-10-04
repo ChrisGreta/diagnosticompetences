@@ -6,10 +6,8 @@
         $password = htmlspecialchars($password);  
         $passwordmd5 = MD5($password);
         $sql = "SELECT ID FROM `utilisateur` where `email` ='$email' and `pass`='$passwordmd5';";
-        echo $sql;
         $resquery = mysqli_query($GLOBALS["conn"], $sql);
         $DATA = mysqli_fetch_array($resquery, MYSQLI_ASSOC);
-        var_dump($DATA);
         return $DATA;
     }
 
@@ -45,7 +43,6 @@
         $last_name = mysqli_real_escape_string($GLOBALS["conn"], $array_post['prenom']);
         $email = mysqli_real_escape_string($GLOBALS["conn"], $array_post['email']);
         $password = mysqli_real_escape_string($GLOBALS["conn"], $array_post['password']);
-        //var_dump(check_email($email));
         if(check_email($email) == false){
             if($array_post['password']!=$array_post['confirm_password']){
                 return 'Les 2 mots de passes ne sont pas identiques !';
@@ -53,6 +50,8 @@
                 $sql = " INSERT INTO `utilisateur` (`ID`, `nom`,`prenom`, `email`, `pass`) VALUES (NULL,'$first_name', '$last_name', '$email', MD5('$password'));";
                 if(mysqli_query($GLOBALS["conn"], $sql)){
                     $last_id = mysqli_insert_id($GLOBALS["conn"]);
+                    send_email_new_user($last_id, $first_name, $last_name, $email );
+
                     return $last_id;
                 } else{
                     return "Erreur lors de la création " . mysqli_error($link);
@@ -60,27 +59,51 @@
             }
         }else{
             $rtn =  "Cet email est déjà utilisé !";
-            $rtn .= "<br /><a href='index.php?page=passwordReminder'> 👉 <u>Rappel de mot de passe</u></a>";
+            //$rtn .= "<br /><a href='index.php?page=passwordReminder'> 👉 <u>Rappel de mot de passe</u></a>";
             return $rtn;
         }
 
     }    
 
-    function getDashboard(){
-        
+
+    function send_email_new_user($last_id, $first_name, $last_name, $email ){
+            $to = "c.leydier@velay.greta.fr";
+            $subject = "[diagnosticompetences] Nouvel utilisateur";
+
+            $message = "
+            <html>
+            <head>
+            <title>Nouvel utilisateur</title>
+            </head>
+            <body>
+            <p>Un nouvel utilisateur vient de s'inscrire!</p>
+            <table>
+            <tr>
+                <th>ID</th>
+                <th>Prenom</th>
+                <th>NOM</th>
+                <th>email</th>
+            </tr>
+            <tr>
+                <td>$last_id</td>
+                <td>$first_name</td>
+                <td>$last_name</td>
+                <td>$email</td>
+            </tr>
+            </table>
+            </body>
+            </html>
+            ";
+
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // More headers
+            $headers .= 'From: <contact@diagnosticompetences.net>' . "\r\n";
+            $headers .= 'Cc: christophe.leydier@greta-auvergne.fr' . "\r\n";
+
+            mail($to,$subject,$message,$headers);
     }
 
-    function getSessions($user_id){
-        $sql = "SELECT US.utilisateur_id,US.session_id,count(`session_reponse_ID`) as nb_question,  (round(count(`session_reponse_ID`)/133,2)) as progress, US.session_debut, US.session_maj 
-        FROM `session_reponses` SR INNER JOIN `utilisateur_session` US ON US.session_id = SR.session_ID 
-        WHERE US.utilisateur_id = $user_id and SR.reponse_id != 0 ";
-        
-        $sql .= "GROUP BY SR.`session_ID` 
-                 ORDER BY US.session_maj DESC;";
 
-        $resquery = mysqli_query($GLOBALS["conn"], $sql);
-        $DATA = mysqli_fetch_all($resquery, MYSQLI_ASSOC);
-        return $DATA;
-        
-    }
-    

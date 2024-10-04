@@ -4,13 +4,15 @@
                 $current_question       = $question[0]["Libelle_question"];                
                 $current_question_id    = $question[0]["ID_question"];
                 ?>
-                <h3 class="mb-2 text-gray-500 font-medium"><?= $current_question?></h3>
+                <h3 class="mb-2 lg:text-lg text-bold sm:text-base text-blue-600 font-bold"><?= $current_question?></h3>
                 <div class="flex flex-col lg:flex-row mx-6 mb-2">
                     <div class="flex flex-col">
                         <?php
                         foreach ($question as $key => $reponse) {
                         ?>
-                            <span><input type="radio" name="ID_reponse" value="<?= $reponse['ID_reponse']; ?>"/>&nbsp;<?= $reponse['Libelle_reponse']; ?></span>
+                            <span class="text-lg lg:text-lg sm:text-base"><input type="radio" name="ID_reponse" value="<?= $reponse['ID_reponse']; ?>"/>
+                                    &nbsp;<?= $reponse['Libelle_reponse']; ?>
+                            </span>
                         <?php
 
                         $array_points = json_decode($reponse['JSON_points_reponse'], true);

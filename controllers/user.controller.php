@@ -8,9 +8,7 @@ function login(){
     $title = "Login";
     $check = null;
     if(!empty($_POST)){
-        //var_dump($_POST);
         $check = check_login($_POST['email'], $_POST['password']);
-
         if($check == null){
             $erreur = "Login/Mot de passe incorrect";
         }
@@ -23,7 +21,7 @@ function login(){
         if($_SESSION['user_id'] == 1 ){
             header("Location: index.php?page=admin");        
         }else{
-            header("Location: index.php?page=dashboard");        
+            header("Location: index.php?page=home");        
         }
     }
 
@@ -80,7 +78,6 @@ function displayProfil(){
 function displayDashboard(){  
     ob_start();
     $title = "Dashboard";
-    var_dump($_SESSION['user_id']);
     $sessions = getSessions($_SESSION['user_id']);
     require('views/templates/user/dashboard.view.php');
 

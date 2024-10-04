@@ -1,7 +1,7 @@
 <section class="bg-white dark:bg-gray-900">
-    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:px-6">
         <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Mode d'emploi</h2>
+            <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white">Mode d'emploi</h2>
             <p class="mb-4">Pour utiliser D'C, vous devez vous inscrire (gratuit). Cela donne accès à un espace personnel.
         Vous devrez ensuite répondre au questionnaire. Comme cela peut être long, vous pouvez étaler
         ce travail sur plusieurs séances. Votre mot de passe vous permet de retourner dans votre espace personnel.
@@ -16,9 +16,9 @@
 </section>
 
 <section class="bg-white dark:bg-gray-900">
-    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:px-6">
         <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Comment cela fonctionne ?</h2>
+            <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white">Comment cela fonctionne ?</h2>
             <p class="mb-4">Réfléchir à ses compétences et ses centres d'intérêt n'est pas toujours facile. C'est pourtant un travail nécessaire pour rechercher un emploi ou pour évoluer. Cette réflexion est également
         indispensable si l'on souhaite créer un portfolio et mieux parler de soi lors d'un entretien.
         Diagnosti'Compétences (D'C) vous aide dans ce travail. A partir de 133 questions, un profil de vos compétences sera établi. Rien de magique, D'C n'est pas devin : il vous aide seulement à

@@ -1,7 +1,7 @@
 <?php
     require_once 'models/user.model.php';
 
-    function homeDisplay(){
+    function homeDisplay($session_id){
 
         // Titre personnalisé
         $title = "Diagnosti'Compétences Accueil";

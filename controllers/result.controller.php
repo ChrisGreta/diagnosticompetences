@@ -6,6 +6,7 @@
         ob_start();
         $title = "Résultat";
         
+        $session = getSessions(null, $session_id);
         $resultats = getResultats($session_id);
 
         $array_result_0 = array();
@@ -24,7 +25,7 @@
             }
             //echo "<hr>".$code.":".$somme."/".count($array_result_0[$code]);            
             //ignore certaines compétences, abandonnées en cours de projet ?
-            $categ_exclude = array("CDC","CDA","MAA","CDE","IVQ","GDS","CAD","OSA","IDD","ECO","ESC");
+            $categ_exclude = array("CDC","CDA","MAA","CDE","IVQ","GDS","CAD","OSA","IDD","ECO","ESC","DDU");
             if (!in_array($code, $categ_exclude)){
                 $array_result[$code]= round($somme/count($array_result_0[$code]),2);
             }

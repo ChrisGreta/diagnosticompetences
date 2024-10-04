@@ -16,41 +16,29 @@
         define('DEBUG', true );
     }
     
-    if (isset($_GET['page'])){
+    require 'controllers/dc.controller.php'; 
+    $session_id = session_id();
 
+    
+    if(empty($_SESSION['user_id'])){
+        $_SESSION['user_id']=null;
+    }
+
+    $_SESSION['current_session'] = $session_id;
+    if(!empty($_GET['session_id'])){
+        $_SESSION['current_session'] = $_GET['session_id'];
+    }
+    if (isset($_GET['page'])){
         require 'controllers/user.controller.php';
         $currentstep = $_GET['page'];  
         switch($_GET['page']){
-
-            case 'home':                
+            case 'home':                   
                     require 'controllers/home.controller.php';
-                    homeDisplay();
+                    homeDisplay($session_id);
                 break;   
             /* FORMULAIRE */         
             case 'dc':
-                require 'controllers/do.controller.php'; 
-
-                if(empty($_SESSION['user_id'])){
-                    stepRegister();
-                }else{
-                    if(!empty($_GET['session_id'])){
-                        if($_GET['session_id'] == 'new'){
-                            session_regenerate_id();   
-                            $php_SSID = session_id();                     
-                            generateTest($php_SSID, $_SESSION['user_id']);
-                            header("Location: index.php?page=dc&session_id=".$php_SSID);
-                        }
-    
-                        $php_SSID = session_id();    
-                    }else{
-                        $php_SSID = lastSession($_SESSION['user_id']);
-                        header("Location: index.php?page=dc&session_id=".$php_SSID);
-                        
-                    }
-                    displayDC($php_SSID);
-                }
-
-
+                displayDC($_SESSION['current_session']);
                 break;
             case 'result':
                 if(!empty($_GET['session_id'])){
@@ -82,8 +70,6 @@
             case 'profil':
                 displayProfil();
                 break; 
-
-
             case 'admin':
                 require 'controllers/admin.controller.php';                
                 adminDisplay();
@@ -92,7 +78,7 @@
         }
     }else{
         require 'controllers/home.controller.php';
-        homeDisplay();
+        homeDisplay(session_id());
     }
 
 ?>

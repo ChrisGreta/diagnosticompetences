@@ -21,9 +21,6 @@
                     WHERE `session_ID`='$php_SSID'";             
             $query = mysqli_query($GLOBALS["conn"], $sql);
             $resultats = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
-            //var_dump($resultats);
-            //echo  $sql;
         }catch (Exception $e) {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
             return false;
